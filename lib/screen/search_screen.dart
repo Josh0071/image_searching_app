@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:image_searching_app/model/api.dart';
 import 'package:image_searching_app/model/pixa_image.dart';
 import 'package:image_searching_app/widget/pixa_image_list.dart';
-import 'package:image_searching_app/widget/search_bar.dart';
 
 class SearchScreen extends StatelessWidget {
   final TextEditingController controller;
