@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_searching_app/model/api.dart';
+import 'package:image_searching_app/api.dart';
 import 'package:image_searching_app/model/pixa_image.dart';
 import 'package:image_searching_app/widget/SearchBar.dart';
 import 'package:image_searching_app/widget/pixa_image_list.dart';
