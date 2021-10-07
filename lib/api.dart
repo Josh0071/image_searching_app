@@ -1,14 +1,18 @@
-import 'dart:convert' as convert;
+import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:image_searching_app/model/hits.dart';
+import 'model/pixabay_result.dart';
 
-Future<List<PixaImage>> fetchList() async {
-  final response = await http.get(
-      'https://pixabay.com/api/?key=17828481-17c071c7f8eadf406822fada3&q=iphone&image_type=photo');
+class PixabayApi {
+  static const base_url = 'https://pixabay.com/api/';
 
-  if (response.statusCode == 200) {
-    var jsonResponse = convert.jsonDecode(response.body);
-    return jsonResponse.map((pixaimagedata) => PixaImageData.fromJson(pixaimagedata)).toList();
+  Future<List<Hits>> getImages(String query) async {
+    final response = await http.get(
+        '$base_url?key=17828481-17c071c7f8eadf406822fada3&q=$query&image_type=photo'); // 오래
+
+    Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+    PixabayResult result = PixabayResult.fromJson(jsonResponse);
+
+    return result.hits;
   }
-
-  throw Exception('Error');
 }
