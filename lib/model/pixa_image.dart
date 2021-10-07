@@ -17,4 +17,12 @@ class PixaImage {
     previewHeight = json['previewHeight'];
   }
 
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = id;
+    map['tags'] = tags;
+    map['previewURL'] = previewURL;
+    map['previewWidth'] = previewWidth;
+    map['previewHeight'] = previewHeight;
+    return map;}
 }

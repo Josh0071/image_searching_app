@@ -2,10 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_searching_app/model/api.dart';
 import 'package:image_searching_app/model/pixa_image.dart';
+import 'package:image_searching_app/widget/SearchBar.dart';
 import 'package:image_searching_app/widget/pixa_image_list.dart';
 
-class SearchScreen extends StatelessWidget {
-  final TextEditingController controller;
+class SearchScreen extends StatefulWidget {
+  @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
+  @override
+  void initState() {
+    super.initState();
+    SearchBar();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +31,7 @@ class SearchScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          TextField(
-            controller: controller,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: '키워드',
-            ),
-          ),
+          SearchBar(),
           FutureBuilder(
             future: fetchList(),
             builder: (context, snapshot) {
@@ -53,6 +57,4 @@ class SearchScreen extends StatelessWidget {
       ),
     );
   }
-
-  SearchScreen(this.controller);
 }

@@ -4,7 +4,7 @@ class PixaImageData {
   PixaImageData.fromJson(dynamic json) {
     total = json['total'];
     totalHits = json['totalHits'];
-    hits.add(PixaImage.fromJson(json));
+    hits.map(() => PixaImage.fromJson(json));
   }
 
   int total;
