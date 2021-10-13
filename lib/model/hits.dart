@@ -1,27 +1,27 @@
 class Hits {
   Hits({
-      int id, 
-      String pageURL, 
-      String type, 
-      String tags, 
-      String previewURL, 
-      int previewWidth, 
-      int previewHeight, 
-      String webformatURL, 
-      int webformatWidth, 
-      int webformatHeight, 
-      String largeImageURL, 
-      int imageWidth, 
-      int imageHeight, 
-      int imageSize, 
-      int views, 
-      int downloads, 
-      int collections, 
-      int likes, 
-      int comments, 
-      int userId, 
-      String user, 
-      String userImageURL,}){
+      int? id, 
+      String? pageURL, 
+      String? type, 
+      String? tags, 
+      String? previewURL, 
+      int? previewWidth, 
+      int? previewHeight, 
+      String? webformatURL, 
+      int? webformatWidth, 
+      int? webformatHeight, 
+      String? largeImageURL, 
+      int? imageWidth, 
+      int? imageHeight, 
+      int? imageSize, 
+      int? views, 
+      int? downloads, 
+      int? collections, 
+      int? likes, 
+      int? comments, 
+      int? userId, 
+      String? user, 
+      String? userImageURL,}){
     _id = id;
     _pageURL = pageURL;
     _type = type;
@@ -70,51 +70,51 @@ class Hits {
     _user = json['user'];
     _userImageURL = json['userImageURL'];
   }
-  int _id;
-  String _pageURL;
-  String _type;
-  String _tags;
-  String _previewURL;
-  int _previewWidth;
-  int _previewHeight;
-  String _webformatURL;
-  int _webformatWidth;
-  int _webformatHeight;
-  String _largeImageURL;
-  int _imageWidth;
-  int _imageHeight;
-  int _imageSize;
-  int _views;
-  int _downloads;
-  int _collections;
-  int _likes;
-  int _comments;
-  int _userId;
-  String _user;
-  String _userImageURL;
+  int? _id;
+  String? _pageURL;
+  String? _type;
+  String? _tags;
+  String? _previewURL;
+  int? _previewWidth;
+  int? _previewHeight;
+  String? _webformatURL;
+  int? _webformatWidth;
+  int? _webformatHeight;
+  String? _largeImageURL;
+  int? _imageWidth;
+  int? _imageHeight;
+  int? _imageSize;
+  int? _views;
+  int? _downloads;
+  int? _collections;
+  int? _likes;
+  int? _comments;
+  int? _userId;
+  String? _user;
+  String? _userImageURL;
 
-  int get id => _id;
-  String get pageURL => _pageURL;
-  String get type => _type;
-  String get tags => _tags;
-  String get previewURL => _previewURL;
-  int get previewWidth => _previewWidth;
-  int get previewHeight => _previewHeight;
-  String get webformatURL => _webformatURL;
-  int get webformatWidth => _webformatWidth;
-  int get webformatHeight => _webformatHeight;
-  String get largeImageURL => _largeImageURL;
-  int get imageWidth => _imageWidth;
-  int get imageHeight => _imageHeight;
-  int get imageSize => _imageSize;
-  int get views => _views;
-  int get downloads => _downloads;
-  int get collections => _collections;
-  int get likes => _likes;
-  int get comments => _comments;
-  int get userId => _userId;
-  String get user => _user;
-  String get userImageURL => _userImageURL;
+  int? get id => _id;
+  String? get pageURL => _pageURL;
+  String? get type => _type;
+  String? get tags => _tags;
+  String? get previewURL => _previewURL;
+  int? get previewWidth => _previewWidth;
+  int? get previewHeight => _previewHeight;
+  String? get webformatURL => _webformatURL;
+  int? get webformatWidth => _webformatWidth;
+  int? get webformatHeight => _webformatHeight;
+  String? get largeImageURL => _largeImageURL;
+  int? get imageWidth => _imageWidth;
+  int? get imageHeight => _imageHeight;
+  int? get imageSize => _imageSize;
+  int? get views => _views;
+  int? get downloads => _downloads;
+  int? get collections => _collections;
+  int? get likes => _likes;
+  int? get comments => _comments;
+  int? get userId => _userId;
+  String? get user => _user;
+  String? get userImageURL => _userImageURL;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

@@ -5,7 +5,7 @@ import 'package:image_searching_app/model/hits.dart';
 import 'package:image_searching_app/widget/image_item.dart';
 
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({Key key}) : super(key: key);
+  const SearchScreen({Key? key}) : super(key: key);
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -48,7 +48,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       TextFormField(
                         controller: _controller,
                         validator: (value){
-                          if(value.trim().isEmpty){
+                          if(value!.trim().isEmpty){
                             return '올바른 검색어를 입력해주세요.';
                           }
                           return null;
@@ -64,7 +64,7 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
               TextButton(
                 onPressed: () {
-                  if(_formkey.currentState.validate()){
+                  if(_formkey.currentState!.validate()){
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('error')));
                   }
                   setState(() {});
@@ -77,7 +77,7 @@ class _SearchScreenState extends State<SearchScreen> {
           SizedBox(
             height: 20,
           ),
-          FutureBuilder<List<Hits>>(
+          FutureBuilder<List<Hits>?>(
             future: _api.getImages(
                 _controller.text.isEmpty ? 'iphone' : _controller.text),
             builder: (context, snapshot) {
@@ -98,7 +98,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 );
               }
 
-              final result = snapshot.data;
+              final result = snapshot.data!;
               return ListView(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
