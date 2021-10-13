@@ -49,7 +49,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         controller: _controller,
                         validator: (value){
                           if(value!.trim().isEmpty){
-                            return '올바른 검색어를 입력해주세요.';
+                            return '올바른 검색어를 입력하세요.';
                           }
                           return null;
                         },
