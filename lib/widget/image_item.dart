@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:image_searching_app/model/hits.dart';
+import 'package:image_searching_app/view_model/hits.dart';
 
 class ImageItem extends StatelessWidget {
   final Hits hits;
-
   const ImageItem({Key? key, required this.hits}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 50, right:50),
+      padding: const EdgeInsets.only(left: 50, right: 50),
       child: Card(
-        shape:
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         elevation: 5,
         child: Column(
           children: [
@@ -28,12 +26,16 @@ class ImageItem extends StatelessWidget {
                     height: 160,
                     fit: BoxFit.cover,
                   ),
-                  SizedBox(height: 5,),
-                  Text(hits.tags!,
-                  style: TextStyle(
-                    fontSize: 17
-                  ),),
-                  SizedBox(height: 5,),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    hits.tags!,
+                    style: TextStyle(fontSize: 17),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
                 ],
               ),
             ),

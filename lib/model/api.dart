@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:image_searching_app/model/hits.dart';
-import '../model/pixabay_result.dart';
+import 'package:image_searching_app/view_model/hits.dart';
+import 'package:image_searching_app/view_model/pixabay_result.dart';
 
 class PixabayApi {
   static const base_url = 'https://pixabay.com/api/';
@@ -13,4 +13,6 @@ class PixabayApi {
     Map<String, dynamic> jsonResponse = jsonDecode(response.body);
     PixabayResult result = PixabayResult.fromJson(jsonResponse);
 
-    return result.hits;}}
+    return result.hits;
+  }
+}

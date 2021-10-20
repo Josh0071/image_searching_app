@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:image_searching_app/data/api.dart';
-import 'package:image_searching_app/model/hits.dart';
+import 'package:image_searching_app/view_model/pixabay_result.dart';
 import 'package:image_searching_app/widget/image_item.dart';
+import 'package:image_searching_app/inherited_widget.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -14,7 +14,6 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   final _formkey = GlobalKey<FormState>();
   final _controller = TextEditingController();
-  final _api = PixabayApi();
 
   @override
   void dispose() {
@@ -35,10 +34,14 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       body: ListView(
         children: [
-          SizedBox(height: 10,),
+          SizedBox(
+            height: 10,
+          ),
           Row(
             children: [
-              SizedBox(width: 15,),
+              SizedBox(
+                width: 15,
+              ),
               Expanded(
                 child: Form(
                   key: _formkey,
@@ -47,8 +50,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     children: [
                       TextFormField(
                         controller: _controller,
-                        validator: (value){
-                          if(value!.trim().isEmpty){
+                        validator: (value) {
+                          if (value!.trim().isEmpty) {
                             return '올바른 검색어를 입력하세요.';
                           }
                           return null;
@@ -64,8 +67,9 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
               TextButton(
                 onPressed: () {
-                  if(_formkey.currentState!.validate()){
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('error')));
+                  if (_formkey.currentState!.validate()) {
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(SnackBar(content: Text('error')));
                   }
                   setState(() {});
                   FocusScope.of(context).unfocus();
@@ -77,9 +81,8 @@ class _SearchScreenState extends State<SearchScreen> {
           SizedBox(
             height: 20,
           ),
-          FutureBuilder<List<Hits>?>(
-            future: _api.getImages(
-                _controller.text.isEmpty ? 'iphone' : _controller.text),
+          StreamBuilder<PixabayResult>(
+            stream: HitsInherited.of(context).view_model.hitsStream,
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 return Text('Error');
@@ -98,11 +101,13 @@ class _SearchScreenState extends State<SearchScreen> {
                 );
               }
 
-              final result = snapshot.data!;
-              return ListView(
+              return ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                children: result.map((e) => ImageItem(hits: e)).toList(),
+                itemCount: snapshot.data!.hits!.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return ImageItem(hits: snapshot.data!.hits![index]);
+                },
               );
             },
           ),

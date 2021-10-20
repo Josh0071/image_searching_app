@@ -1,27 +1,28 @@
 class Hits {
   Hits({
-      int? id, 
-      String? pageURL, 
-      String? type, 
-      String? tags, 
-      String? previewURL, 
-      int? previewWidth, 
-      int? previewHeight, 
-      String? webformatURL, 
-      int? webformatWidth, 
-      int? webformatHeight, 
-      String? largeImageURL, 
-      int? imageWidth, 
-      int? imageHeight, 
-      int? imageSize, 
-      int? views, 
-      int? downloads, 
-      int? collections, 
-      int? likes, 
-      int? comments, 
-      int? userId, 
-      String? user, 
-      String? userImageURL,}){
+    int? id,
+    String? pageURL,
+    String? type,
+    String? tags,
+    String? previewURL,
+    int? previewWidth,
+    int? previewHeight,
+    String? webformatURL,
+    int? webformatWidth,
+    int? webformatHeight,
+    String? largeImageURL,
+    int? imageWidth,
+    int? imageHeight,
+    int? imageSize,
+    int? views,
+    int? downloads,
+    int? collections,
+    int? likes,
+    int? comments,
+    int? userId,
+    String? user,
+    String? userImageURL,
+  }) {
     _id = id;
     _pageURL = pageURL;
     _type = type;
@@ -44,7 +45,7 @@ class Hits {
     _userId = userId;
     _user = user;
     _userImageURL = userImageURL;
-}
+  }
 
   Hits.fromJson(dynamic json) {
     _id = json['id'];
@@ -70,6 +71,7 @@ class Hits {
     _user = json['user'];
     _userImageURL = json['userImageURL'];
   }
+
   int? _id;
   String? _pageURL;
   String? _type;
@@ -94,26 +96,47 @@ class Hits {
   String? _userImageURL;
 
   int? get id => _id;
+
   String? get pageURL => _pageURL;
+
   String? get type => _type;
+
   String? get tags => _tags;
+
   String? get previewURL => _previewURL;
+
   int? get previewWidth => _previewWidth;
+
   int? get previewHeight => _previewHeight;
+
   String? get webformatURL => _webformatURL;
+
   int? get webformatWidth => _webformatWidth;
+
   int? get webformatHeight => _webformatHeight;
+
   String? get largeImageURL => _largeImageURL;
+
   int? get imageWidth => _imageWidth;
+
   int? get imageHeight => _imageHeight;
+
   int? get imageSize => _imageSize;
+
   int? get views => _views;
+
   int? get downloads => _downloads;
+
   int? get collections => _collections;
+
   int? get likes => _likes;
+
   int? get comments => _comments;
+
   int? get userId => _userId;
+
   String? get user => _user;
+
   String? get userImageURL => _userImageURL;
 
   Map<String, dynamic> toJson() {
@@ -142,5 +165,4 @@ class Hits {
     map['userImageURL'] = _userImageURL;
     return map;
   }
-
 }
