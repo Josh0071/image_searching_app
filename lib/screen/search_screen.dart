@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:image_searching_app/view_model/hits.dart';
 import 'package:image_searching_app/view_model/pixabay_result.dart';
 import 'package:image_searching_app/widget/image_item.dart';
 import 'package:image_searching_app/inherited_widget.dart';
@@ -81,7 +82,7 @@ class _SearchScreenState extends State<SearchScreen> {
           SizedBox(
             height: 20,
           ),
-          StreamBuilder<PixabayResult>(
+          StreamBuilder<List<Hits>>(
             stream: HitsInherited.of(context).view_model.hitsStream,
             builder: (context, snapshot) {
               if (snapshot.hasError) {
@@ -100,13 +101,15 @@ class _SearchScreenState extends State<SearchScreen> {
                   ],
                 );
               }
-
+              final result = snapshot.data;
               return ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: snapshot.data!.hits!.length,
+                itemCount: result?.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return ImageItem(hits: snapshot.data!.hits![index]);
+                  return ImageItem(
+                    hits: result![index],
+                  );
                 },
               );
             },

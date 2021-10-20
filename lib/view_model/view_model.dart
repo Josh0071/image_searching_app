@@ -1,16 +1,13 @@
 import 'dart:async';
 import 'package:image_searching_app/model/api.dart';
-import 'package:image_searching_app/view_model/pixabay_result.dart';
+import 'package:image_searching_app/view_model/hits.dart';
 
 class ViewModel {
-  late final response;
-
-  ViewModel(this.response);
-
+ late final response;
   final _hits = PixabayApi();
-  final _hitsStreamController = StreamController<PixabayResult>();
+  final _hitsStreamController = StreamController<List<Hits>>();
 
-  Stream<PixabayResult> get hitsStream => _hitsStreamController.stream;
+  Stream<List<Hits>> get hitsStream => _hitsStreamController.stream;
 
   void getImage(String querry) {
     response = _hits.getImages(querry);
