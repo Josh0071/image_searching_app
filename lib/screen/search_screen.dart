@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:image_searching_app/view_model/hits.dart';
+import 'package:image_searching_app/view_model/pixabay_result.dart';
+import 'package:image_searching_app/view_model/view_model.dart';
 import 'package:image_searching_app/widget/image_item.dart';
-import 'package:image_searching_app/inherited_widget.dart';
+import 'package:provider/provider.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -71,8 +72,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     ScaffoldMessenger.of(context)
                         .showSnackBar(SnackBar(content: Text('error')));
                   }
-                  setState(() {});
                   FocusScope.of(context).unfocus();
+                  context.read<ViewModel>().getImage(_controller.text);
                 },
                 child: Text('검색'),
               )
@@ -81,40 +82,27 @@ class _SearchScreenState extends State<SearchScreen> {
           SizedBox(
             height: 20,
           ),
-          StreamBuilder<List<Hits>>(
-            stream: HitsInherited.of(context).view_model.hitsStream,
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return Text('Error');
-              }
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Column(
-                  children: [
-                    SizedBox(
-                      height: 250,
-                    ),
-                    Center(
-                        child: Align(
-                            alignment: Alignment.center,
-                            child: CircularProgressIndicator())),
-                  ],
-                );
-              }
-              final result = snapshot.data;
-              return ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: result?.length!,
-                itemBuilder: (BuildContext context, int index) {
-                  return ImageItem(
-                    hits: result![index],
-                  );
-                },
-              );
-            },
-          ),
+          Consumer<ViewModel>(builder: (_,ViewModel viewModel, child){
+            final model = context.watch<ViewModel>().response;
+           return imageWidget(context, model!);
+            }
+          )
         ],
       ),
     );
+  }
+
+  Widget imageWidget(BuildContext context, PixabayResult response,) {
+    final hits = response.hits!;
+    return ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: hits.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ImageItem(
+                  hits: hits[index],
+                );
+              },
+            );
   }
 }

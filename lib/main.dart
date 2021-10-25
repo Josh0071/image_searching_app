@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_searching_app/screen/search_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:image_searching_app/view_model/view_model.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,7 +21,10 @@ class MyApp extends StatelessWidget {
       ),
       themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
-      home: SearchScreen(),
+      home:  ChangeNotifierProvider<ViewModel>(
+        create: (_) => ViewModel(),
+        child: const SearchScreen(),
+      ),
     );
   }
 }

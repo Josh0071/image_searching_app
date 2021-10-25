@@ -1,19 +1,18 @@
-import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:image_searching_app/model/api.dart';
 import 'package:image_searching_app/view_model/hits.dart';
+import 'package:image_searching_app/view_model/pixabay_result.dart';
 
-class ViewModel {
- late final response;
+class ViewModel with ChangeNotifier {
   final _hits = PixabayApi();
-  final _hitsStreamController = StreamController<List<Hits>>();
+  PixabayResult? _response;
+  PixabayResult? get response => _response;
 
-  Stream<List<Hits>> get hitsStream => _hitsStreamController.stream;
-
-  void getImage(String querry) {
-    response = _hits.getImages(querry);
-  }
-
-  void get() {
-    _hitsStreamController.add(this.response);
-  }
+  void getImage(String Image){
+   _hits.getImages(Image).then((result){
+     _response = result;
+     notifyListeners();
+   }
+   );
+ }
 }
