@@ -24,6 +24,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   void initState() {
+    context.read<ViewModel>().getImage('iphone');
     super.initState();
   }
 
@@ -70,7 +71,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 onPressed: () {
                   if (_formkey.currentState!.validate()) {
                     ScaffoldMessenger.of(context)
-                        .showSnackBar(SnackBar(content: Text('error')));
+                        .showSnackBar(SnackBar(content: Text('올바른 검색어를 입력해주세요')));
                   }
                   FocusScope.of(context).unfocus();
                   context.read<ViewModel>().getImage(_controller.text);
@@ -84,6 +85,9 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
           Consumer<ViewModel>(builder: (_,ViewModel viewModel, child){
             final model = context.watch<ViewModel>().response;
+            if(viewModel.response!.hits == null){
+              return Center(child: CircularProgressIndicator());
+            }
            return imageWidget(context, model!);
             }
           )
@@ -94,6 +98,14 @@ class _SearchScreenState extends State<SearchScreen> {
 
   Widget imageWidget(BuildContext context, PixabayResult response,) {
     final hits = response.hits!;
+    if(hits.isEmpty){
+      return Center(
+        child: Text('올바른 검색어를 입력해주세요',
+        style: TextStyle(
+          fontSize: 25,
+        ),),
+      );
+    }
     return ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
