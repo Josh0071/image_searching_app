@@ -106,6 +106,9 @@ class _SearchScreenState extends State<SearchScreen> {
         ),),
       );
     }
+    if(response == null){
+      return CircularProgressIndicator();
+    }
     return ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
