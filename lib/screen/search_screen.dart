@@ -83,11 +83,8 @@ class _SearchScreenState extends State<SearchScreen> {
           SizedBox(
             height: 20,
           ),
-          Consumer<ViewModel>(builder: (_,ViewModel viewModel, child){
+          Consumer<ViewModel>(builder: (_,ViewModel viewModel, Widget? child){
             final model = context.watch<ViewModel>().response;
-            if(viewModel.response!.hits == null){
-              return Center(child: CircularProgressIndicator());
-            }
            return imageWidget(context, model!);
             }
           )
@@ -113,7 +110,7 @@ class _SearchScreenState extends State<SearchScreen> {
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               itemCount: hits.length,
-              itemBuilder: (BuildContext context, int index) {
+              itemBuilder: (BuildContext context, int index,) {
                 return ImageItem(
                   hits: hits[index],
                 );
