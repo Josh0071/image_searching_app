@@ -30,6 +30,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final model = context.watch<ViewModel>().response;
     return Scaffold(
       appBar: AppBar(
         title: const Text('API Test'),
@@ -84,7 +85,6 @@ class _SearchScreenState extends State<SearchScreen> {
             height: 20,
           ),
           Consumer<ViewModel>(builder: (_,ViewModel viewModel, Widget? child){
-            final model = context.watch<ViewModel>().response;
            return imageWidget(context, model!);
             }
           )
