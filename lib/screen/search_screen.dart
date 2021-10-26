@@ -95,6 +95,9 @@ class _SearchScreenState extends State<SearchScreen> {
 
   Widget imageWidget(BuildContext context, PixabayResult response,) {
     final hits = response.hits!;
+    if(response == ConnectionState.waiting){
+      return Center(child: CircularProgressIndicator());
+    }
     if(hits.isEmpty){
       return Center(
         child: Text('올바른 검색어를 입력해주세요',
@@ -104,7 +107,7 @@ class _SearchScreenState extends State<SearchScreen> {
       );
     }
     if(response == null){
-      return CircularProgressIndicator();
+      return Center(child: CircularProgressIndicator());
     }
     return ListView.builder(
               shrinkWrap: true,
