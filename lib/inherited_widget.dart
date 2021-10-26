@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:image_searching_app/view_model/view_model.dart';
 
 class HitsInherited extends InheritedWidget {
-  final ViewModel view_model;
+  final ViewModel viewModel;
 
   const HitsInherited({
     Key? key,
-    required this.view_model,
+    required this.viewModel,
     required Widget child,
   }) : super(key: key, child: child);
 
@@ -17,5 +17,5 @@ class HitsInherited extends InheritedWidget {
   }
 
   @override
-  bool updateShouldNotify(HitsInherited old) => true;
+  bool updateShouldNotify(HitsInherited oldWidget) => true;
 }

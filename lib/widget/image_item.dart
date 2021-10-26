@@ -14,30 +14,28 @@ class ImageItem extends StatelessWidget {
         elevation: 5,
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            Container(
-              child: Column(
-                children: [
-                  Image.network(
-                    hits.previewURL!,
-                    width: 200,
-                    height: 160,
-                    fit: BoxFit.cover,
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    hits.tags!,
-                    style: TextStyle(fontSize: 17),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                ],
-              ),
+            Column(
+              children: [
+                Image.network(
+                  hits.previewURL!,
+                  width: 200,
+                  height: 160,
+                  fit: BoxFit.cover,
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  hits.tags!,
+                  style: const TextStyle(fontSize: 17),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+              ],
             ),
           ],
         ),

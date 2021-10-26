@@ -36,12 +36,12 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       body: ListView(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Row(
             children: [
-              SizedBox(
+              const SizedBox(
                 width: 15,
               ),
               Expanded(
@@ -58,7 +58,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           }
                           return null;
                         },
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: '검색어를 입력하세요',
                           border: OutlineInputBorder(),
                         ),
@@ -71,16 +71,16 @@ class _SearchScreenState extends State<SearchScreen> {
                 onPressed: () {
                   if (_formkey.currentState!.validate()) {
                     ScaffoldMessenger.of(context)
-                        .showSnackBar(SnackBar(content: Text('올바른 검색어를 입력해주세요')));
+                        .showSnackBar(const SnackBar(content: Text('올바른 검색어를 입력해주세요')));
                   }
                   FocusScope.of(context).unfocus();
                   context.read<ViewModel>().getImage(_controller.text);
                 },
-                child: Text('검색'),
+                child: const Text('검색'),
               )
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Consumer<ViewModel>(builder: (_,ViewModel viewModel, Widget? child){
@@ -95,23 +95,17 @@ class _SearchScreenState extends State<SearchScreen> {
 
   Widget imageWidget(BuildContext context, PixabayResult response,) {
     final hits = response.hits!;
-    if(response == ConnectionState.waiting){
-      return Center(child: CircularProgressIndicator());
-    }
     if(hits.isEmpty){
-      return Center(
+      return const Center(
         child: Text('올바른 검색어를 입력해주세요',
         style: TextStyle(
           fontSize: 25,
         ),),
       );
     }
-    if(response == null){
-      return Center(child: CircularProgressIndicator());
-    }
     return ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: hits.length,
               itemBuilder: (BuildContext context, int index,) {
                 return ImageItem(
