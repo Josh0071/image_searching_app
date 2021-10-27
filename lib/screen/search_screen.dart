@@ -24,7 +24,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   void initState() {
-    context.read<ViewModel>().getImage('iphone');
+    Future.microtask(() => context.read<ViewModel>().getImage('iphone'));
     super.initState();
   }
 
