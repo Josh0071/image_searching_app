@@ -70,10 +70,6 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
               TextButton(
                 onPressed: () {
-                  if (_formkey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('올바른 검색어를 입력해주세요')));
-                  }
                   FocusScope.of(context).unfocus();
                   context.read<ViewModel>().getImage(_controller.text);
                 },

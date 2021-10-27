@@ -4,7 +4,10 @@ import 'package:provider/provider.dart';
 import 'package:image_searching_app/view_model/view_model.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [ChangeNotifierProvider.value(value: ViewModel())],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -23,10 +26,7 @@ class MyApp extends StatelessWidget {
       ),
       themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
-      home:  ChangeNotifierProvider<ViewModel>(
-        create: (_) => ViewModel(),
-        child: const SearchScreen(),
-      ),
+      home: const SearchScreen(),
     );
   }
 }
