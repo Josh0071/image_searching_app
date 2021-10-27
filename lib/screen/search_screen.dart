@@ -71,8 +71,8 @@ class _SearchScreenState extends State<SearchScreen> {
               TextButton(
                 onPressed: () {
                   if (_formkey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context)
-                        .showSnackBar(const SnackBar(content: Text('올바른 검색어를 입력해주세요')));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('올바른 검색어를 입력해주세요')));
                   }
                   FocusScope.of(context).unfocus();
                   context.read<ViewModel>().getImage(_controller.text);
@@ -84,34 +84,49 @@ class _SearchScreenState extends State<SearchScreen> {
           const SizedBox(
             height: 20,
           ),
-          Consumer<ViewModel>(builder: (_,ViewModel viewModel, Widget? child){
-           return imageWidget(context, model!);
+          Consumer<ViewModel>(builder: (_, ViewModel viewModel, Widget? child) {
+            if (viewModel.response != null) {
+              return imageWidget(context, model!);
+            } else {
+              return const Center(
+                  child: SizedBox(
+                      height: 30,
+                      width: 30,
+                      child: CircularProgressIndicator()));
             }
-          )
+          })
         ],
       ),
     );
   }
 
-  Widget imageWidget(BuildContext context, PixabayResult response,) {
+  Widget imageWidget(
+    BuildContext context,
+    PixabayResult response,
+  ) {
     final hits = response.hits!;
-    if(hits.isEmpty){
+    if (hits.isEmpty) {
       return const Center(
-        child: Text('올바른 검색어를 입력해주세요',
-        style: TextStyle(
-          fontSize: 25,
-        ),),
+        child: Text(
+          '올바른 검색어를 입력해주세요',
+          style: TextStyle(
+            fontSize: 25,
+          ),
+        ),
       );
     }
     return ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: hits.length,
-              itemBuilder: (BuildContext context, int index,) {
-                return ImageItem(
-                  hits: hits[index],
-                );
-              },
-            );
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: hits.length,
+      itemBuilder: (
+        BuildContext context,
+        int index,
+      ) {
+        return ImageItem(
+          hits: hits[index],
+        );
+      },
+    );
   }
 }
